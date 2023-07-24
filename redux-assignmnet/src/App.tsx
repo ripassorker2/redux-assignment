@@ -1,13 +1,12 @@
-
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/router";
 
 function App() {
-
-
   return (
-    <>
-      <h1>Redux Assignment</h1>
-    </>
-  )
+    <div className="font-serif">
+      <RouterProvider router={router}></RouterProvider>
+    </div>
+  );
 }
 
-export default App
+export default App;
