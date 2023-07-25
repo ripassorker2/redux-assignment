@@ -23,7 +23,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to={""}
+                to={"/all-books"}
                 className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 All Books
