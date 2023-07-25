@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div>
       <footer className="divide-y bg-gray-900 text-gray-200">
-        <div className="container flex flex-col justify-between py-10 px-4 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+        <div className="container flex flex-col justify-between py-10 space-y-8 lg:flex-row lg:space-y-0">
           <div className="lg:w-1/3">
             <Link to={"/"}>
               <h3 className="text-3xl font-serif text-gray-200">

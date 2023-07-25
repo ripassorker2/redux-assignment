@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className="bg-gray-900">
       <div className="container">
-        <div className="relative flex items-center justify-between py-3 px-4">
+        <div className="relative flex items-center justify-between py-3">
           <Link to={"/"}>
             <h3 className="text-3xl font-serif text-gray-200">
               <span className="text-rose-600">E-</span>Book

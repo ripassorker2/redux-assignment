@@ -8,7 +8,7 @@ import { IBook } from "../../interface/IBook";
 const BookCard: React.FC<{ book: IBook }> = ({ book }) => {
   return (
     <div className="hover:shadow-xl shadow p-3">
-      <Link to={`/details/`}>
+      <Link to={`/details/${book._id}`}>
         <img
           className=" w-full h-52 rounded-lg md:h-60"
           src={book.image}
