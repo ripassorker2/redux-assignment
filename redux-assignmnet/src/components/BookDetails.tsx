@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { IBook } from "../../interface/IBook";
+import { IBook } from "../interface/IBook";
 
 const BookDetails = () => {
   const book: IBook = useLoaderData();

@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/Home/Home";
 import AllBooks from "../pages/AllBooks/AllBooks";
-import BookDetails from "../components/BookCard/BookDetails";
+import BookDetails from "../components/BookDetails";
+import AddBook from "../components/AddBook";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +25,8 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
-        path: "/all-books",
-        element: <AllBooks />,
+        path: "/add-book",
+        element: <AddBook />,
       },
     ],
   },
