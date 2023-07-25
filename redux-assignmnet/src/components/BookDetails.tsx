@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { IBook } from "../interface/IBook";
 
 const BookDetails = () => {
@@ -6,9 +6,11 @@ const BookDetails = () => {
   return (
     <div className="container py-14">
       <div className="text-end">
-        <button className="text-gray-200 rounded px-5 py-1 bg-rose-600">
-          Edit
-        </button>{" "}
+        <Link to={`/update-book/${book._id}`}>
+          <button className="text-gray-200 rounded px-5 py-1 bg-rose-600 mr-2">
+            Edit
+          </button>
+        </Link>
         <button className="text-gray-200 rounded px-5 py-1 bg-gray-900">
           Delete
         </button>{" "}

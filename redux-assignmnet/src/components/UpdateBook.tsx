@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const AddBook = () => {
+const UpdateBook = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const title = event.target.title.value;
@@ -101,7 +101,7 @@ const AddBook = () => {
                   type="submit"
                   className="text-gray-200 rounded px-5 py-1 text-lg bg-rose-600"
                 >
-                  Submit
+                  Update
                 </button>
               </div>
             </form>
@@ -112,4 +112,4 @@ const AddBook = () => {
   );
 };
 
-export default AddBook;
+export default UpdateBook;
