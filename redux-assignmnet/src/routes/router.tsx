@@ -5,6 +5,8 @@ import AllBooks from "../pages/AllBooks/AllBooks";
 import BookDetails from "../components/BookDetails";
 import AddBook from "../components/AddBook";
 import UpdateBook from "../components/UpdateBook";
+import Resister from "../pages/Resister/Resister";
+import Login from "../pages/Login/Login";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: "/update-book/:id",
         element: <UpdateBook />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/resister",
+        element: <Resister />,
       },
     ],
   },

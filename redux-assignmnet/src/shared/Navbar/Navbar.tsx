@@ -39,7 +39,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to={""}
+                to={"/login"}
                 className="text-gray-900 rounded px-2 py-1 bg-gray-200"
               >
                 Sign In
@@ -47,7 +47,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to={""}
+                to={"/resister"}
                 className="text-gray-900 rounded px-2 py-1 bg-gray-200"
               >
                 Sign Up
