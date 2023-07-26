@@ -5,12 +5,14 @@ import { createUser } from "../../redux/features/user/userSlice";
 import { useEffect } from "react";
 import SmallLoader from "../../utils/SmallLoader";
 import { toast } from "react-hot-toast";
+import { useSaveUserMutation } from "../../redux/api/userApiSlice";
 
 const Resister = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { user, isLoading, error } = useAppSelector((state) => state.user);
+  const [saveUser, {}] = useSaveUserMutation();
 
   useEffect(() => {
     if (user.email) {
@@ -26,12 +28,18 @@ const Resister = () => {
 
   const handleResister = (event: any) => {
     event.preventDefault();
-    // const name = event.target.name.value;
+    const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
 
     dispatch(createUser({ email, password }));
+    const user = {
+      name,
+      email,
+    };
+    saveUser(user);
   };
+
   return (
     <div className="container  flex flex-col justify-center py-14">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">

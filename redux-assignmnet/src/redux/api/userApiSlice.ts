@@ -1,44 +1,20 @@
 import { api } from "./apiSlice";
 
-export const bookApi = api.injectEndpoints({
+const userAPiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    getBooks: builder.query({
-      query: () => ({ url: "books" }),
-      providesTags: ["books"],
-    }),
-    getSingleBook: builder.query({
-      query: (id) => ({ url: `book/${id}` }),
-      providesTags: ["books"],
-    }),
-    postBook: builder.mutation({
-      query: (data) => ({
-        url: "book",
+    saveUser: builder.mutation({
+      query: (user) => ({
+        url: "user",
         method: "POST",
-        body: data,
+        body: user,
       }),
-      invalidatesTags: ["books"],
     }),
-    updateBook: builder.mutation({
-      query: ({ id, book }) => ({
-        url: `book/${id}`,
-        method: "PUT",
-        body: book,
+    getUser: builder.query({
+      query: (emial: string) => ({
+        url: `user/${emial}`,
       }),
-      invalidatesTags: ["books"],
-    }),
-    deleteBook: builder.mutation({
-      query: (id) => ({
-        url: `book/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["books"],
     }),
   }),
 });
-export const {
-  useGetBooksQuery,
-  useGetSingleBookQuery,
-  usePostBookMutation,
-  useUpdateBookMutation,
-  useDeleteBookMutation,
-} = bookApi;
+
+export const { useGetUserQuery, useSaveUserMutation } = userAPiSlice;

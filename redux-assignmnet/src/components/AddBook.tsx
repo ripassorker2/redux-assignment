@@ -4,7 +4,7 @@ import { IBook } from "../interface/IBook";
 import { useAppSelector } from "../redux/hooks";
 import { useNavigate } from "react-router-dom";
 import Loader from "../utils/Loader";
-import { usePostBookMutation } from "../redux/api/userApiSlice";
+import { usePostBookMutation } from "../redux/api/bookApiSlice";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AddBook = () => {

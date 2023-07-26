@@ -1,6 +1,6 @@
 import BookCard from "../../components/BookCard";
 import { IBook } from "../../interface/IBook";
-import { useGetBooksQuery } from "../../redux/api/userApiSlice";
+import { useGetBooksQuery } from "../../redux/api/bookApiSlice";
 import Loader from "../../utils/Loader";
 
 const AllBooks = () => {
@@ -17,7 +17,7 @@ const AllBooks = () => {
       </h2>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10 mb-8 ">
         {books?.map((book: IBook) => (
-          <BookCard key={book.title} book={book} />
+          <BookCard key={book._id} book={book} />
         ))}
       </div>
     </div>

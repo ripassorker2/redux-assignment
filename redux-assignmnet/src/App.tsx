@@ -15,12 +15,14 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(setUser(user.email!));
+
         dispatch(setLoading(false));
       } else {
         dispatch(setLoading(false));
       }
     });
   }, [dispatch]);
+
   return (
     <div className="font-serif">
       <RouterProvider router={router}></RouterProvider>

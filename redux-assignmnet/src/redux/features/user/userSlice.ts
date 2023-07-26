@@ -10,7 +10,6 @@ import { auth } from "../../../firebase/firebase.init";
 interface IUserState {
   user: {
     email: string | null;
-    name: string | null;
   };
   isLoading: boolean;
   isError: boolean;
@@ -29,7 +28,6 @@ interface IResisterInfo {
 const initialState: IUserState = {
   user: {
     email: null,
-    name: null,
   },
   isLoading: false,
   isError: false,
@@ -44,17 +42,6 @@ export const createUser = createAsyncThunk(
     return data.user.email;
   }
 );
-// export const updateUser = createAsyncThunk(
-//   "user/updateUser",
-//   async ({ name }: { name: string }) => {
-//     const data = await updateProfile(auth.currentUser!, {
-//       displayName: name,
-//     });
-//     console.log(data);
-
-//     return data.user!.displayName;
-//   }
-// );
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
@@ -104,7 +91,6 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(logOut.fulfilled, (state) => {
-        state.user.name = null;
         state.user.email = null;
         state.isLoading = false;
       })

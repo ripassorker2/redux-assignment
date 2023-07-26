@@ -4,7 +4,7 @@ import { useAppSelector } from "../redux/hooks";
 import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
-} from "../redux/api/userApiSlice";
+} from "../redux/api/bookApiSlice";
 import Loader from "../utils/Loader";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
