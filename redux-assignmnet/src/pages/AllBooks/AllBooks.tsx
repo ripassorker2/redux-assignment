@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
 import BookCard from "../../components/BookCard";
 import { IBook } from "../../interface/IBook";
+import { useGetBooksQuery } from "../../redux/api/apiSlice";
+import Loader from "../../utils/Loader";
 
 const AllBooks = () => {
-  const [books, setBooks] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/books")
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
-  }, []);
+  const { data: books, isLoading } = useGetBooksQuery("");
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="container pt-14">

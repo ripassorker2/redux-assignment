@@ -5,7 +5,8 @@ type IReview = {
 };
 
 export interface IBook {
-  _id: string;
+  _id?: string;
+  email: string;
   title: string;
   image: string;
   description: string;

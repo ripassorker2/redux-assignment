@@ -1,8 +1,15 @@
-import { Link, useLoaderData } from "react-router-dom";
-import { IBook } from "../interface/IBook";
+import { Link, useParams } from "react-router-dom";
+import { useGetSingleBookQuery } from "../redux/api/apiSlice";
+import Loader from "../utils/Loader";
 
 const BookDetails = () => {
-  const book: IBook = useLoaderData();
+  const { id } = useParams();
+  const { data: book, isLoading } = useGetSingleBookQuery(id);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="container py-14">
       <div className="text-end">

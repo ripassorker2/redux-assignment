@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { loginUser } from "../../redux/features/user/userSlice";
 import { useEffect } from "react";
+import SmallLoader from "../../utils/SmallLoader";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { user } = useAppSelector((state) => state.user);
+  const { user, isLoading, error } = useAppSelector((state) => state.user);
 
   const handleLogin = (event: any) => {
     event.preventDefault();
@@ -22,6 +24,12 @@ const Login = () => {
       navigate("/");
     }
   }, [user?.email!]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <div className="container  flex flex-col justify-center py-14">
@@ -73,13 +81,12 @@ const Login = () => {
                     type="submit"
                     className="bg-rose-500 text-white rounded-md px-4 py-1.5 w-full"
                   >
-                    Login
+                    {isLoading ? <SmallLoader /> : "Login"}
                   </button>
                 </div>
                 <p className="max-w-xs text-base">
                   If you don't have account!! Please
                   <Link to={"/resister"} className="text-rose-600 underline">
-                    {" "}
                     Sign up
                   </Link>
                 </p>

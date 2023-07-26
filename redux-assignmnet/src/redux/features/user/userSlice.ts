@@ -69,14 +69,6 @@ export const logOut = createAsyncThunk("user/logOut", async () => {
 
   return;
 });
-// export const signout = createAsyncThunk(
-//   "user/signOut",
-//   async () => {
-//     const data = await signOut();
-
-//     return data.user.email;
-//   }
-// );
 
 const userSlice = createSlice({
   name: "user ",

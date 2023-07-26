@@ -1,5 +1,17 @@
+import { toast } from "react-hot-toast";
+import { IBook } from "../interface/IBook";
+import { usePostBookMutation } from "../redux/api/apiSlice";
+import { useAppSelector } from "../redux/hooks";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Loader from "../utils/Loader";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AddBook = () => {
+  const { user } = useAppSelector((state) => state.user);
+  const [postBook, { isSuccess, isLoading }] = usePostBookMutation();
+  const navigate = useNavigate();
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const title = event.target.title.value;
@@ -9,16 +21,25 @@ const AddBook = () => {
     const publication_date = event.target.publication_date.value;
     const description = event.target.description.value;
 
-    const book = {
+    const book: IBook = {
       title,
       image: photoUrl,
       author,
+      email: user.email!,
       genre,
       publication_date,
       description,
     };
-    console.log(book);
+    postBook(book);
+    if (isLoading) {
+      return <Loader />;
+    }
+    if (isSuccess) {
+      toast.success("Book created succesfully...");
+      navigate("/all-books");
+    }
   };
+
   return (
     <div className="p-6 flex items-center justify-center my-10">
       <div className="container max-w-screen-lg mx-auto">

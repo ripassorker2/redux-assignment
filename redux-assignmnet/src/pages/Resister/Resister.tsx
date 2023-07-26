@@ -3,18 +3,26 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { createUser } from "../../redux/features/user/userSlice";
 import { useEffect } from "react";
+import SmallLoader from "../../utils/SmallLoader";
+import { toast } from "react-hot-toast";
 
 const Resister = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { user } = useAppSelector((state) => state.user);
+  const { user, isLoading, error } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (user.email) {
       navigate("/");
     }
   }, [user?.email!]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const handleResister = (event: any) => {
     event.preventDefault();
@@ -93,7 +101,7 @@ const Resister = () => {
                     type="submit"
                     className="bg-rose-500 text-white rounded-md px-4 py-1.5 w-full"
                   >
-                    Login
+                    {isLoading ? <SmallLoader /> : "Resister"}
                   </button>
                 </div>
                 <p className="max-w-xs text-base">
