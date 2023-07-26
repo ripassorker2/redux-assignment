@@ -1,11 +1,32 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Loader from "../utils/Loader";
-import { useGetSingleBookQuery } from "../redux/api/userApiSlice";
+import {
+  useDeleteBookMutation,
+  useGetSingleBookQuery,
+} from "../redux/api/userApiSlice";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 const BookDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data: book, isLoading } = useGetSingleBookQuery(id);
+  const [deleteBook, { isSuccess }] = useDeleteBookMutation();
+
+  const handleDeleteBook = () => {
+    const agree = window.confirm("Are you sure you want to delete this book..");
+    if (agree) {
+      deleteBook(id);
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Book delete successfully...");
+      navigate(`/all-books`);
+    }
+  }, [isSuccess, id, navigate]);
 
   if (isLoading) {
     return <Loader />;
@@ -19,7 +40,10 @@ const BookDetails = () => {
             Edit
           </button>
         </Link>
-        <button className="text-gray-200 rounded px-5 py-1 bg-gray-900">
+        <button
+          onClick={handleDeleteBook}
+          className="text-gray-200 rounded px-5 py-1 bg-gray-900"
+        >
           Delete
         </button>{" "}
       </div>
