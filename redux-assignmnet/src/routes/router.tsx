@@ -7,6 +7,7 @@ import AddBook from "../components/AddBook";
 import UpdateBook from "../components/UpdateBook";
 import Resister from "../pages/Resister/Resister";
 import Login from "../pages/Login/Login";
+import PrivetRouter from "../PriivetRouter/PrivetRouter";
 
 const router = createBrowserRouter([
   {
@@ -24,16 +25,22 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <BookDetails />,
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
         path: "/add-book",
-        element: <AddBook />,
+        element: (
+          <PrivetRouter>
+            <AddBook />
+          </PrivetRouter>
+        ),
       },
       {
         path: "/update-book/:id",
-        element: <UpdateBook />,
+        element: (
+          <PrivetRouter>
+            <UpdateBook />
+          </PrivetRouter>
+        ),
       },
       {
         path: "/login",

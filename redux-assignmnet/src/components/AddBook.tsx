@@ -3,13 +3,13 @@ import { IBook } from "../interface/IBook";
 
 import { useAppSelector } from "../redux/hooks";
 import { useNavigate } from "react-router-dom";
-import Loader from "../utils/Loader";
 import { usePostBookMutation } from "../redux/api/bookApiSlice";
+import { useEffect } from "react";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AddBook = () => {
   const { user } = useAppSelector((state) => state.user);
-  const [postBook, { isSuccess, isLoading }] = usePostBookMutation();
+  const [postBook, { isSuccess }] = usePostBookMutation();
   const navigate = useNavigate();
 
   const handleSubmit = (event: any) => {
@@ -31,14 +31,14 @@ const AddBook = () => {
       description,
     };
     postBook(book);
-    if (isLoading) {
-      return <Loader />;
-    }
+  };
+
+  useEffect(() => {
     if (isSuccess) {
       toast.success("Book created succesfully...");
       navigate("/all-books");
     }
-  };
+  }, [isSuccess, navigate]);
 
   return (
     <div className="p-6 flex items-center justify-center my-10">

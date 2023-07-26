@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { loginUser } from "../../redux/features/user/userSlice";
 import { useEffect } from "react";
@@ -9,6 +9,8 @@ import { toast } from "react-hot-toast";
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const { user, isLoading, error } = useAppSelector((state) => state.user);
 
@@ -21,7 +23,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user.email) {
-      navigate("/");
+      navigate(from, { replace: true });
     }
   }, [user?.email!]);
 
