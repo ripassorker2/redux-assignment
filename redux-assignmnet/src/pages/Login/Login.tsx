@@ -1,14 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { loginUser } from "../../redux/features/user/userSlice";
+import { useEffect } from "react";
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useAppSelector((state) => state.user);
+
   const handleLogin = (event: any) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-
-    console.log(email, password);
+    dispatch(loginUser({ email, password }));
   };
+
+  useEffect(() => {
+    if (user.email) {
+      navigate("/");
+    }
+  }, [user?.email!]);
 
   return (
     <div className="container  flex flex-col justify-center py-14">

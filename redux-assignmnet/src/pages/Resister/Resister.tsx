@@ -1,15 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { createUser } from "../../redux/features/user/userSlice";
+import { useEffect } from "react";
 
 const Resister = () => {
-  const handleLogin = (event: any) => {
-    event.preventDefault();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-    const name = event.target.name.value;
+  const { user } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user.email) {
+      navigate("/");
+    }
+  }, [user?.email!]);
+
+  const handleResister = (event: any) => {
+    event.preventDefault();
+    // const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    console.log(name, email, password);
+    dispatch(createUser({ email, password }));
   };
   return (
     <div className="container  flex flex-col justify-center py-14">
@@ -22,7 +35,10 @@ const Resister = () => {
                 Sign Up in <span className="text-rose-600">E-</span> book
               </h1>
             </div>
-            <form onSubmit={handleLogin} className="divide-y divide-gray-200">
+            <form
+              onSubmit={handleResister}
+              className="divide-y divide-gray-200"
+            >
               <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                 <div className="relative">
                   <input

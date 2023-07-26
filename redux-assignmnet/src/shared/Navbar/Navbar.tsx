@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logOut } from "../../redux/features/user/userSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  const handleLogOut = () => {
+    dispatch(logOut());
+  };
+
   return (
     <div className="bg-gray-900">
       <div className="container">
@@ -37,22 +45,37 @@ const Navbar = () => {
                 Add Book
               </Link>
             </li>
-            <li>
-              <Link
-                to={"/login"}
-                className="text-gray-900 rounded px-2 py-1 bg-gray-200"
-              >
-                Sign In
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/resister"}
-                className="text-gray-900 rounded px-2 py-1 bg-gray-200"
-              >
-                Sign Up
-              </Link>
-            </li>
+            {user?.email ? (
+              <>
+                <li onClick={handleLogOut}>
+                  <Link
+                    to={"/login"}
+                    className="text-gray-900 rounded px-2 py-1 bg-gray-200"
+                  >
+                    LogOut
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to={"/login"}
+                    className="text-gray-900 rounded px-2 py-1 bg-gray-200"
+                  >
+                    Sign In
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/resister"}
+                    className="text-gray-900 rounded px-2 py-1 bg-gray-200"
+                  >
+                    Sign Up
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
 
           <div className="lg:hidden">
