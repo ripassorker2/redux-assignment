@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
-import { useGetSingleBookQuery } from "../redux/api/apiSlice";
+
 import Loader from "../utils/Loader";
+import { useGetSingleBookQuery } from "../redux/api/userApiSlice";
 
 const BookDetails = () => {
   const { id } = useParams();

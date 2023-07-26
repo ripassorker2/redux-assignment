@@ -1,5 +1,29 @@
+import { useNavigate, useParams } from "react-router-dom";
+import { IBook } from "../interface/IBook";
+import { useAppSelector } from "../redux/hooks";
+import {
+  useGetSingleBookQuery,
+  useUpdateBookMutation,
+} from "../redux/api/userApiSlice";
+import Loader from "../utils/Loader";
+import { toast } from "react-hot-toast";
+import { useEffect } from "react";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const UpdateBook = () => {
+  const { user } = useAppSelector((state) => state.user);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { data: book, isLoading } = useGetSingleBookQuery(id);
+  const [updateBook, { isSuccess }] = useUpdateBookMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Book update successfully...");
+      navigate(`/details/${id}`);
+    }
+  }, [isSuccess, id, navigate]);
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const title = event.target.title.value;
@@ -9,16 +33,26 @@ const UpdateBook = () => {
     const publication_date = event.target.publication_date.value;
     const description = event.target.description.value;
 
-    const book = {
+    const book: IBook = {
       title,
       image: photoUrl,
+      email: user.email!,
       author,
       genre,
       publication_date,
       description,
     };
-    console.log(book);
+    const option = {
+      id,
+      book,
+    };
+    updateBook(option);
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="p-6 flex items-center justify-center my-10">
       <div className="container max-w-screen-lg mx-auto">
@@ -37,6 +71,7 @@ const UpdateBook = () => {
                     name="title"
                     className="h-10 border mt-1 rounded px-4 w-full border-gray-400 focus:outline-none focus:border focus:border-gray-700"
                     placeholder="title....."
+                    defaultValue={book.title}
                     required
                   />
                 </div>
@@ -48,6 +83,7 @@ const UpdateBook = () => {
                     name="photoUrl"
                     className="h-10 border mt-1 rounded px-4 w-full border-gray-400 focus:outline-none focus:border focus:border-gray-700"
                     placeholder="Photo Url...."
+                    defaultValue={book.image}
                     required
                   />
                 </div>
@@ -59,6 +95,7 @@ const UpdateBook = () => {
                     name="author"
                     className="h-10 border mt-1 rounded px-4 w-full border-gray-400 focus:outline-none focus:border focus:border-gray-700"
                     placeholder="author...."
+                    defaultValue={book.author}
                     required
                   />
                 </div>
@@ -70,16 +107,18 @@ const UpdateBook = () => {
                     name="genre"
                     className="h-10 border mt-1 rounded px-4 w-full border-gray-400 focus:outline-none focus:border focus:border-gray-700"
                     placeholder="genre....."
+                    defaultValue={book.genre}
                     required
                   />
                 </div>
                 <div className="md:col-span-5">
                   <label>Publication Date</label>
                   <input
-                    type="date"
+                    type="text"
                     name="publication_date"
                     className="h-10 border mt-1 rounded px-4 w-full border-gray-400 focus:outline-none focus:border focus:border-gray-700"
                     placeholder="publication date....."
+                    defaultValue={book.publication_date}
                     required
                   />
                 </div>
@@ -91,6 +130,7 @@ const UpdateBook = () => {
                       className="h-14 border mt-1 rounded px-4 pt-1 w-full border-gray-400 focus:outline-none focus:border focus:border-gray-700"
                       name="description"
                       placeholder="Description...."
+                      defaultValue={book.description}
                       required
                     ></textarea>
                   </div>
