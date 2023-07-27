@@ -1,7 +1,8 @@
-type IReview = {
+export type IReview = {
   reviewer: string;
   rating: string;
   comment: string;
+  _id?: string;
 };
 
 export interface IBook {

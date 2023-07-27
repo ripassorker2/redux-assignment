@@ -37,16 +37,6 @@ const Navbar = () => {
                 All Books
               </Link>
             </li>
-            {user.email && (
-              <li>
-                <Link
-                  to={"/add-book"}
-                  className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
-                >
-                  Add Book
-                </Link>
-              </li>
-            )}
 
             {user?.email ? (
               <>
