@@ -122,7 +122,7 @@ const Navbar = () => {
                     <ul className="space-y-4 ">
                       <li>
                         <Link
-                          to={""}
+                          to={"/"}
                           className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
                         >
                           Home
@@ -130,36 +130,44 @@ const Navbar = () => {
                       </li>
                       <li>
                         <Link
-                          to={""}
+                          to={"/all-books"}
                           className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
                         >
                           All Books
                         </Link>
                       </li>
-                      <li>
-                        <Link
-                          to={""}
-                          className="font-medium tracking-wide text-gray-200 transition-colors duration-200 hover:text-teal-accent-400"
-                        >
-                          Add Book
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to={""}
-                          className="text-gray-900 rounded px-3 mt-2 py-1 bg-gray-200 w-full"
-                        >
-                          Sign In
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to={""}
-                          className="text-gray-900 rounded px-3 mt-2 py-1 bg-gray-200 w-full"
-                        >
-                          Sign Up
-                        </Link>
-                      </li>
+
+                      {user?.email ? (
+                        <>
+                          <li onClick={handleLogOut}>
+                            <Link
+                              to={"/login"}
+                              className="text-gray-900 rounded px-3 mt-2 py-1 bg-gray-200 w-full"
+                            >
+                              LogOut
+                            </Link>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li>
+                            <Link
+                              to={"/login"}
+                              className="text-gray-900 rounded px-3 mt-2 py-1 bg-gray-200 w-full"
+                            >
+                              Sign In
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to={"/resister"}
+                              className="text-gray-900 rounded px-3 mt-2 py-1 bg-gray-200 w-full"
+                            >
+                              Sign Up
+                            </Link>
+                          </li>
+                        </>
+                      )}
                     </ul>
                   </nav>
                 </div>

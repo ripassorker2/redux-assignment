@@ -48,12 +48,12 @@ const AllBooks = () => {
 
   return (
     <div className="container pt-14">
-      <div className="flex justify-between">
+      <div className="md:flex justify-between">
         <h2 className="text-gray-900 md:text-3xl text-2xl border-b border-rose-600 inline-block">
           All Books
         </h2>
         {path === "/all-books" && (
-          <div className="flex items-center ">
+          <div className="md:flex items-center mt-4 md:mt-0">
             <input
               className="px-4 py-1 border border-gray-500 focus:border-gray-800 outline-none rounded-md md:w-[350px] block"
               type="text"
@@ -64,7 +64,7 @@ const AllBooks = () => {
             />
 
             <select
-              className="ml-2 px-3 py-1.5 border border-gray-500 focus:border-gray-800 outline-none rounded-md block"
+              className="md:ml-2 mt-4 md:mt-0 px-3 py-1.5 border border-gray-500 focus:border-gray-800 outline-none rounded-md block"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
               name="filter"
@@ -77,12 +77,14 @@ const AllBooks = () => {
           </div>
         )}
         {user.email && path === "/all-books" && (
-          <Link
-            to={"/add-book"}
-            className="text-gray-200 rounded md:px-5 px-3 py-1 bg-rose-600 "
-          >
-            Add Book
-          </Link>
+          <div className="mt-4 md:mt-0">
+            <Link
+              to={"/add-book"}
+              className="text-gray-200 rounded px-5  py-1 bg-rose-600 "
+            >
+              Add Book
+            </Link>
+          </div>
         )}
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10 mb-8 ">

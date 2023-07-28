@@ -93,6 +93,15 @@ const BookDetails = () => {
           <p className="text-gray-900 text-lg mb-1">
             Description : {book.description}
           </p>
+
+          <div className="t">
+            <button className="text-gray-200 rounded px-5 py-1 bg-rose-600 mr-2">
+              Add Whistlist
+            </button>
+            <button className="text-gray-200 rounded px-5 py-1 bg-gray-900">
+              Read plan
+            </button>{" "}
+          </div>
         </div>
       </div>
       <div>
