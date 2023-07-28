@@ -62,7 +62,7 @@ const BookDetails = () => {
   return (
     <div className="container py-14">
       {user.email === book.email && (
-        <div className="text-end">
+        <div className="text-end mb-3 md:mb-0">
           <Link to={`/update-book/${book._id}`}>
             <button className="text-gray-200 rounded px-5 py-1 bg-rose-600 mr-2">
               Edit
@@ -79,7 +79,7 @@ const BookDetails = () => {
 
       <div className="md:flex justify-between items-center md:space-x-10">
         <div className="md:h-[500px]  w-full">
-          <img className="h-full w-full rounded" src={book?.image} alt="" />
+          <img className="md:h-full w-full rounded" src={book?.image} alt="" />
         </div>
         <div className="">
           <h3 className="text-gray-900 text-2xl mb-2 font-medium">
